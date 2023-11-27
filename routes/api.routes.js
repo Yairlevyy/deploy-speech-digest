@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const fs = require('fs');
+const fs = require('node:fs');
 const { OpenAI } = require('openai');
 require("dotenv").config();
 const {authenticateJWT} = require('../middlewares/authMiddleware.js');
