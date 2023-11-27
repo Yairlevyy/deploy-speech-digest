@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const fs = require('fs');
+// const fs = require('fs');
 const { OpenAI } = require('openai');
 require("dotenv").config();
 const {authenticateJWT} = require('../middlewares/authMiddleware.js');
@@ -37,13 +37,13 @@ api_router.post('/upload/:userId', authenticateJWT, upload.single('audioFile'), 
     const summary = await summarize(transcript);
 
     // Delete the file after successful processing
-    fs.unlink(filePath, (err) => {
-      if (err) {
-        console.error('Error deleting file:', err);
-      } else {
-        console.log('File deleted successfully');
-      }
-    });
+    // fs.unlink(filePath, (err) => {
+    //   if (err) {
+    //     console.error('Error deleting file:', err);
+    //   } else {
+    //     console.log('File deleted successfully');
+    //   }
+    // });
 
     const title = req.query.title;
 
