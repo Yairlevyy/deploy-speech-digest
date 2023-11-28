@@ -34,7 +34,7 @@ const signUp = async (req,res) => {
         try { 
         const hash_password = await hashPassword(password)
             try { 
-                const id = uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+                const id = uuidv4();
                 const data = await _signUp(id,email,hash_password);
                 
                 // Generate a JWT for the new user
@@ -43,7 +43,7 @@ const signUp = async (req,res) => {
                 });
 
                 // Set the JWT as an HTTP cookie
-                res.cookie('token', token, { httpOnly: true });               
+                // res.cookie('token', token, { httpOnly: true });               
                 res.status(200).json({msg:'The account was successfuly created !',user_id:data[0].id,token:token})
             } catch (err) {
                 console.log(err)
@@ -80,13 +80,12 @@ const signIn = async (req,res) => {
             const isMatch = await comparePasswords(password,data[0].password)
             if (isMatch) {
                 // Generate a JWT for the new user
-                // console.log("id:",data[0].id,"email:",email)
                 const token = jwt.sign({ id:data[0].id, email }, process.env.JWT_KEY, {
                 expiresIn: '3d', // Token expires in 3 days
                 });
                 console.log("token",token)
                 // Set the JWT as an HTTP cookie
-                res.cookie('token', token, { httpOnly: true });               
+                // res.cookie('token', token, { httpOnly: true });               
                 res.status(200).json({msg:'Successfuly login !',user_id:data[0].id,token:token})
             } else {
                 res.status(404).json({msg:"Password wrong!"})

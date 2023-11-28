@@ -21,7 +21,7 @@ function NavBar({data,setData,setFilteredData,filteredData,handlePageChange,curr
 
     // Filter the data based on the input value
     const filtered = data.filter((item) =>{
-      return JSON.parse(item.summary).title.toLowerCase().includes(inputValue)
+      return item.title.toLowerCase().includes(inputValue)
     });
 
     setFilteredData(filtered);

@@ -12,7 +12,7 @@ function SignUp() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === 'email') {
-      setEmail(value);
+      setEmail(value.toLowerCase());
     } else if (name === 'password') {
       setPassword(value);
     }
