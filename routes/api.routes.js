@@ -70,8 +70,9 @@ api_router.post('/upload/:userId', authenticateJWT, upload.single('audioFile'), 
 });
 
 async function transcription(filePath) {
+  const file = fs.createReadStream(filePath);
   const transcription = await openai.audio.transcriptions.create({
-    file: fs.createReadStream(filePath),
+    file: file,
     model: 'whisper-1',
   });
 
